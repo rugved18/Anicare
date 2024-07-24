@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Report Form</title>
+    <link rel="stylesheet" href="{% static 'NGO-Form.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
+                <ion-icon name="menu-outline" aria-hidden="true" class="menu-icon"></ion-icon>
+                <ion-icon name="close-outline" aria-label="true" class="close-icon"></ion-icon>
+            </button>
+            <a href="#" class="logo">Anicare</a>
+            <ul class="navbar-list">
+                <li class="navbar-item">
+                    <a href="{% url 'landing_page' %}" class="navbar-link">Home</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="{% url 'LoadEcommerce' %}" class="navbar-link">Shop</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="{% url 'redirectToServices' %}" class="navbar-link">Services</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="{% url 'NgoLink' %}" class="navbar-link">NGO</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="{% url 'landing_page' %}?scrollToFooter=true" class="navbar-link">Contact</a>
+                </li>
+                {% if username %}
+                <li class="navbar-item">
+                    <h3 class="navbar-link" id="Display-username"><b>Hi! {{ username }}</b></h3>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <form id="animalForm" method="post" enctype="multipart/form-data" action="{% url 'SubmitNgoForm' %}">
+            {% csrf_token %}
+
+            <div class="headline">
+                <h1>NGO Form</h1>
+            </div>
+
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" required>
+
+            <label for="description">Description</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="photo">Upload Photo</label>
+            <input type="file" id="photo" name="photo" accept="image/*">
+
+            <label>Animal Type</label>
+            <div class="radio-group">
+                <input type="radio" id="pet" name="animal_type" value="pet" required>
+                <label for="pet">Pet</label>
+                <input type="radio" id="stray" name="animal_type" value="stray" required>
+                <label for="stray">Stray</label>
+            </div>
+
+            <label>Priority</label>
+            <div class="radio-group">
+                <input type="radio" id="emergency" name="priority" value="emergency" required>
+                <label for="emergency">Emergency</label>
+                <input type="radio" id="urgent" name="priority" value="urgent" required>
+                <label for="urgent">Urgent</label>
+                <input type="radio" id="not_urgent" name="priority" value="not_urgent" required>
+                <label for="not_urgent">Not Urgent</label>
+            </div>
+
+            <input type="hidden" id="latitude" name="latitude">
+            <input type="hidden" id="longitude" name="longitude">
+
+            <button type="submit">Submit</button>
+        </form>
+        <div id="form-message"></div>
+    </div>
+    <script src="{% static 'NGO-Form.js' %}"></script>
+    <script>
+        // Get user's current location
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        // Set latitude and longitude values in hidden fields
+        function showPosition(position) {
+            document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
+            document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
+        }
+
+        // Call getLocation function on page load
+        window.onload = function() {
+            getLocation();
+        };
+
+        // Handle form submission via AJAX
+        document.getElementById('animalForm').onsubmit = function(event) {
+            event.preventDefault();  // Prevent the form from submitting the default way
+            var formData = new FormData(this);
+            
+            fetch("{% url 'SubmitNgoForm' %}", {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                const messageDiv = document.getElementById('form-message');
+                messageDiv.innerHTML = `<p>${data.message}</p>`;
+                messageDiv.classList.add('success');
+            })
+            .catch(error => {
+                const messageDiv = document.getElementById('form-message');
+                messageDiv.innerHTML = `<p>Form submission failed.</p>`;
+                messageDiv.classList.add('error');
+                console.error('Error:', error);
+            });
+        };
+    </script>
+</body>
+</html>
