@@ -27,7 +27,7 @@ def SubmitNgoForm(request):
                        f'Latitude: {instance.latitude}\nLongitude: {instance.longitude}\n\n'
                        f'Please check the admin panel for more details.\n\nGoogle Maps Location: {google_maps_url}')
             from_email = 'aanicaree@gmail.com'
-            recipient_list = ['rugvedkulk2003@gmail.com',]
+            recipient_list = ['rugvedkulk2003@gmail.com','']
 
             # Send email
             try:
