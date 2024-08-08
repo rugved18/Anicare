@@ -126,12 +126,19 @@
             .then(data => {
                 const messageDiv = document.getElementById('form-message');
                 messageDiv.innerHTML = `<p>${data.message}</p>`;
-                messageDiv.classList.add('success');
+                if (data.success) {
+                    messageDiv.classList.add('success');
+                    messageDiv.classList.remove('error');
+                } else {
+                    messageDiv.classList.add('error');
+                    messageDiv.classList.remove('success');
+                }
             })
             .catch(error => {
                 const messageDiv = document.getElementById('form-message');
                 messageDiv.innerHTML = `<p>Form submission failed.</p>`;
                 messageDiv.classList.add('error');
+                messageDiv.classList.remove('success');
                 console.error('Error:', error);
             });
         };

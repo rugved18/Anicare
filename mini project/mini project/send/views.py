@@ -14,12 +14,11 @@ def SubmitNgoForm(request):
         if form.is_valid():
             instance = form.save()
 
-            # Construct Google Maps URL
+          
             latitude = instance.latitude
             longitude = instance.longitude
             google_maps_url = f"https://maps.google.com/maps?q={latitude},{longitude}"
 
-            # Prepare email content
             subject = 'New Animal Report Submitted'
             message = (f'A new animal report has been submitted.\n\nDetails:\n\nName: {instance.name}\n'
                        f'Phone: {instance.phone}\nLocation: {instance.location}\nDescription: {instance.description}\n'
@@ -29,7 +28,6 @@ def SubmitNgoForm(request):
             from_email = 'aanicaree@gmail.com'
             recipient_list = ['rugvedkulk2003@gmail.com','']
 
-            # Send email
             try:
                 send_mail(subject, message, from_email, recipient_list, fail_silently=False)
                 return JsonResponse({'message': 'Form submitted successfully!'})
@@ -38,27 +36,27 @@ def SubmitNgoForm(request):
 
         else:
             errors = form.errors.as_json()
-            print(errors)  # Print errors to console for debugging
+            print(errors)  
             return JsonResponse({'message': 'Form submission failed.', 'errors': errors}, status=400)
 
     else:
-        form = AnimalReportForm()  # Create a new form instance for GET requests
+        form = AnimalReportForm()  
 
     return render(request, 'NGO-Form.html', {'form': form})
 def user_page(request):
-    send = False  # Flag to track if email was sent successfully
+    send = False 
     if request.method == 'POST':
         form = AnimalReportForm(request.POST, request.FILES)
         if form.is_valid():
-            # If the form is valid, save the submission to the database
+           
             instance = form.save(commit=False)
-            # Additional processing if needed before saving
+            
             instance.save()
 
-            # Example of sending email to admin (optional)
-            send = True  # Set to True if email sending is successful
+           
+            send = True  
         else:
-            # Handle form errors if needed
+           
             pass
 
     else:
