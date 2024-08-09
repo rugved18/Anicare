@@ -1,0 +1,46 @@
+<!-- myapp/templates/admin/animal_reports_admin.html -->
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Reports - Admin</title>
+    <link rel="stylesheet" href="{% static 'admin.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Animal Reports - Admin</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>Animal Type</th>
+                    <th>Priority</th>
+                    <th>Photo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for report in reports %}
+                <tr>
+                    <td>{{ report.name }}</td>
+                    <td>{{ report.phone }}</td>
+                    <td>{{ report.location }}</td>
+                    <td>{{ report.description }}</td>
+                    <td>{{ report.get_animal_type_display }}</td>
+                    <td>{{ report.get_priority_display }}</td>
+                    <td><img src="{{ report.photo.url }}" alt="Animal Photo" width="100"></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7">No animal reports found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

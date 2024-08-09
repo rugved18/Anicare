@@ -1,0 +1,31 @@
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+</head>
+<body>
+    <h1>User Page</h1>
+    <form method="post" action="user">
+        {% csrf_token %}
+        <label for="user_name">User Name:</label><br>
+        <input type="text" id="user_name" name="user_name"><br>
+        <label for="submission_data">Submission Data:</label><br>
+        <textarea id="submission_data" name="submission_data"></textarea><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if send %}
+     <h3>Message sent successfully!!</h3>
+    
+    {% elif send %}
+     <h3>Message not sent! Try again later</h3>
+     
+    {% endif %}
+</body>
+</html>
+
+{% endblock %}

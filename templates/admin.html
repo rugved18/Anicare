@@ -1,0 +1,192 @@
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, minimal-ui, viewport-fit=cover">
+    <meta name="theme-color" content="#2196f3">
+    <meta name="author" content="DexignZone" />
+    <meta name="keywords" content="" />
+    <meta name="robots" content="" />
+    <meta name="description" content="PraniCure - Animal Helpline App" />
+    <meta property="og:title" content="PraniCure - Animal Helpline App" />
+    <meta property="og:description" content="PraniCure - Animal Helpline App" />
+    <meta name="format-detection" content="telephone=no">
+
+    <style>
+        body {
+        font-size: 50px; /* Adjust the font size as per your preference */
+        /* background-image: url(background_img.jpg); */
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        width: 100vw;
+
+    }
+
+    .page-content {
+        max-width: 600px; /* Adjust the maximum width as needed */
+        margin: 0 auto; /* Center the content on the page */
+        padding: 20px; /* Add padding to the content */
+        /* background-color: ; */
+        background-color: aliceblue;
+/*         
+        background-color:rgba(0,0,0,0.5);
+        width: 100%;
+        font-size: 18px;
+        border-radius: 10px;
+        border:1px soid rgba(255,255,255,0.3);
+        box-shadow: 2px 2px 15px
+         rgba(0,0,0,0.3);
+         color:#fff; */
+
+    }
+
+    .input-group {
+        width: 100%; /* Set the width to 100% to make the input boxes full-width */
+    }
+
+    .form-control {
+        font-size: 16px; /* Adjust the font size as per your preference */
+        height: 40px; /* Adjust the height of the input boxes */
+    }
+
+
+    .admin_main{
+        position: relative;
+        margin-top: 20px;
+        font-size: 50px;
+    }
+
+    .sub_containner{
+        position: relative;
+    }
+    
+    body{
+      
+      background-size: cover;
+      background-position: center;
+    }
+    
+
+   
+    </style>
+    <!-- Favicons Icon -->
+
+
+    <!-- Title -->
+    <title>Anicare - Animal Helpline App</title>
+
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="{% static 'admin.css' %}">
+    
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&amp;family=Roboto+Slab:wght@100;300;500;600;800&amp;display=swap"
+        rel="stylesheet">
+
+</head>
+<body class="bg-white">
+    
+<nav>
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="nav-brand">
+          <a class="logo" href="#" >Anicare</a>
+        </div>
+        <ul>
+          <li>
+            <a href="landingPage">Home</a>
+          </li>
+
+          <li>
+            <a href="LoadEcommerce">Shop</a>
+          </li>
+
+          <li>
+            <a href="index.html">Services</a>
+          </li>
+
+          <li>
+            <a href="NgoLink">NGO</a>
+          </li>
+
+          <li>
+            <a href="redirectToMl">ML model</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<!-- main -->
+  <div class="new_containner ">
+
+    <h1 class="admin_main">Admin Interface</h1>
+
+    <!-- sub1 -->
+<div class="sub_containner one" >
+    <div class="mb-2 input-group input-radius" style="width: 100%;">
+        <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+        <input type="text" class="form-control" style="font-size: 16px; height: 40px;" placeholder="Name of the user" required>
+    </div>
+</div >
+
+<!-- sub2 -->
+<!-- <div style="width: 300px;" class="sub_containner two">
+    <div>
+        <img src="" alt="">
+    </div>
+    <div>
+        <label style="font-size: 25px;">User Name: </label><br>
+        <input type="text" name="name" id="name" placeholder="Enter Your Name"><br><br>
+    </div>
+    <div>
+        <label style="font-size: 25px;">Phone Number: </label><br>
+        <input type="text" name="number" id="number" placeholder="Enter Your phone number"><br><br>
+    </div>
+</div> -->
+
+<!-- sub3 -->
+<!-- sub2 -->
+<div class="sub_containner two">
+
+  {% for report in animal_reports %}
+
+  <div>
+      <img src="{{ report.photo.url }}" alt="Animal Photo">
+  </div>
+  <div>
+      <label style="font-size: 25px;">User Name: </label><br>
+      <input type="text" name="name" id="name" value="{{ report.user_name }}"><br><br>
+  </div>
+  <div>
+      <label style="font-size: 25px;">Phone Number: </label><br>
+      <input type="text" name="number" id="number" value="{{ report.phone_number }}"><br><br>
+  </div>
+  
+  
+{% endfor %}
+
+</div>
+
+</div>
+  
+
+    <!--**********************************
+    Scripts
+***********************************-->
+</body>
+</html>
+
+{% endblock %}
