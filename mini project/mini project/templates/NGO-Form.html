@@ -99,7 +99,7 @@
             }
         }
 
-        // Set latitude and longitude values in hidden fields
+        
         function showPosition(position) {
             document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
             document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
@@ -110,7 +110,7 @@
             getLocation();
         };
 
-        // Handle form submission via AJAX
+        
         document.getElementById('animalForm').onsubmit = function(event) {
             event.preventDefault();  // Prevent the form from submitting the default way
             var formData = new FormData(this);

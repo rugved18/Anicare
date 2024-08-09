@@ -1,0 +1,204 @@
+/* NGO-Form.css */
+
+/* Reset default styles */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navigation bar styles */
+nav {
+    background-color: #333333;
+    color: #fff;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#animalForm{
+    width: 800px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+}
+
+.navbar-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-item {
+    margin: 0;
+    padding: 0 10px;
+}
+
+.navbar-link {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.navbar-link:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+#Display-username {
+    margin-left: 10px;
+    color: #ffd700;
+}
+
+/* Form styles */
+form {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+form h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+form input[type="text"],
+form input[type="tel"],
+form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+form input[type="file"] {
+    padding: 0.5rem;
+}
+
+form .radio-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+form .radio-group input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+form .radio-group label {
+    margin-right: 1rem;
+}
+
+form button {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
+    .navbar-list {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .navbar-item {
+        margin-bottom: 10px;
+    }
+    .logo {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1rem;
+    }
+    form {
+        padding: 1.5rem;
+    }
+    form h1 {
+        font-size: 1.5rem;
+    }
+    form button {
+        font-size: 0.9rem;
+    }
+}
+
+
+/* NGO-Form.css */
+
+#form-message {
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+    display: none; /* Initially hidden */
+}
+
+#form-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+#form-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
